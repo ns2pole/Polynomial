@@ -1,4 +1,4 @@
-package jp.math.program;
+package org.example;
 import java.util.ArrayList;
 public class ArrayListMethod {
 	/**[1,4,4,5,10],[1,5,12,15] output [1,5]*/
@@ -55,15 +55,7 @@ public class ArrayListMethod {
 		return intersect;
 	}
 	
-	/**互いに素*/
-	protected static boolean isCoprime(int ints1,int ints2) {
-		if(ArrayListMethodInt.getGCDOf(ints1, ints2) == 1) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
+
 	/**{2,2,5},{2,2,2,3} -> {2,3,5},ArrayList<T>*/
 		public static <T> ArrayList<T> getContainThingOf(ArrayList<T> arr1, ArrayList<T> arr2){
 			ArrayList<T> numberList = new ArrayList<T>();

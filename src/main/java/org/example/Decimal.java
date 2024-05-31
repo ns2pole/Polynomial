@@ -1,4 +1,4 @@
-package jp.math.program;
+package org.example;
 
 public class Decimal {
 	private String integralValue;//整数部分

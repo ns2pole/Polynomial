@@ -1,4 +1,4 @@
-package jp.math.program;
+package org.example;
 
 import java.util.ArrayList;
 

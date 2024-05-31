@@ -1,4 +1,4 @@
-package jp.math.program;
+package org.example;
 
 public class Pair<T,S> {
 	private T first;

@@ -1,6 +1,5 @@
-package jp.math.program;
+package org.example;
 
-import static jp.math.program.ArrayListMethodInteger.*;
 
 import java.util.ArrayList;
 
@@ -60,6 +59,7 @@ public class Ratio {
 		Ratio addedRatio = new Ratio(addedDenominator,addedNumerator);
 		return addedRatio.getIrreducibleRatio();
 	}
+
 	/**既約であるならばtrueを返す:(12,9) false*/
 	protected boolean isIrreducible(){
 		int GCD = ArrayListMethodInt.getGCDOf(denominator, numerator);
@@ -69,10 +69,22 @@ public class Ratio {
 			return false;
 		}
 	}
+
+	public boolean isOne() {
+		if(this.denominator == this.numerator) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	@Override
 	public String toString() {
-		return this.numerator + "/" + this.denominator;
+		if(this.denominator == 1) {
+			return String.valueOf(this.numerator);
+		} else {
+			return this.numerator + "/" + this.denominator;
+		}
 	}
 	
 	@Override
@@ -101,19 +113,6 @@ public class Ratio {
 		int minusedNumerator = firstNumerator - secondNumerator;
 		Ratio minusedRatio = new Ratio(minusedDenominator,minusedNumerator);
 		return minusedRatio.getIrreducibleRatio();
-	}
-	
-	/**帯分数へ変換*/
-	protected MixedFraction toMixedFraction() {
-		int resultNumerator = this.numerator % this.denominator;
-		int resultFraction = this.numerator / this.denominator;
-		return new MixedFraction(resultFraction,this.denominator,resultNumerator);
-	}
-	//分母分子に√ -> 有理化
-	protected IntRootRatio toRoot() {
-		IntRootRatio rootRatio = new IntRootRatio(toIntRoot(this.denominator),toIntRoot(this.numerator));
-		IntRootRatio resultRatio = rationalizeOf(rootRatio);
-		return resultRatio;
 	}
 	
 	protected double toDesimal() {
@@ -168,7 +167,7 @@ public class Ratio {
 		Decimal result = new Decimal(integerValString, decimalValString);
 		return result;
 	}
-	
+
 	protected String getRecurringDecimal() {
 		int remainder = this.numerator % this.denominator;
 		int firstRemainder = this.numerator % this.denominator;

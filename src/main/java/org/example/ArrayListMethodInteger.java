@@ -1,4 +1,4 @@
-package jp.math.program;
+package org.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,116 +102,7 @@ public interface ArrayListMethodInteger {
 		return resultNum;
 	}
 	
-	//√換算
-	//8 -> 2,2,2 -> 2√2
-	public static Root toRoot(int int1){
-		Ratio zeroRatio = new Ratio(1,0);
-		Ratio oneRatio = new Ratio(1,1);
-		Root zeroRoot = new Root(zeroRatio,0);
-		Root oneRoot = new Root(oneRatio,1);
-		
-		if(int1 == 0) {
-			return zeroRoot;
-		}else if(int1 == 1){
-			return oneRoot;
-		}else{
-			ArrayList<Integer> primeFactors = getPrimeFactorsOf(int1);
-		Collections.sort(primeFactors);
-		ArrayList<Integer> resultCoff = detectDoubleNum(primeFactors);
-		Ratio coff = new Ratio(1,1);
-		for(int i = 0;i<resultCoff.size();i++) {
-			Ratio a = new Ratio(1,resultCoff.get(i));
-			coff = coff.getProductRatio(a);
-		}
-		ArrayList<Integer> resultInside = detectSingleNum(primeFactors);
-		int inside = 1;
-			for(int i = 0;i<resultInside.size();i++) {
-			int a = resultInside.get(i);
-			inside = inside * a;
-		}
-		Root result = new Root(coff,inside);
-		
-			return result;
-		}
-	}	
-		
-	//public static Root toRoot(Ratio ratio) {
-		//return 0;
-		//}
-	
-	public static IntRoot toIntRoot(int int1){
-		int zeroRatio = 0;
-		int oneRatio = 1;
-		IntRoot zeroRoot = new IntRoot(zeroRatio,0);
-		IntRoot oneRoot = new IntRoot(oneRatio,1);
-		
-		if(int1 == 0) {
-			return zeroRoot;
-		}else if(int1 == 1){
-			return oneRoot;
-		}else{
-			ArrayList<Integer> primeFactors = getPrimeFactorsOf(int1);
-		Collections.sort(primeFactors);
-		ArrayList<Integer> resultCoff = detectDoubleNum(primeFactors);
-		int coff = 1;
-		for(int i = 0;i<resultCoff.size();i++) {
-			int a = resultCoff.get(i);
-			coff = coff * a;
-		}
-		ArrayList<Integer> resultInside = detectSingleNum(primeFactors);
-		int inside = 1;
-			for(int i = 0;i<resultInside.size();i++) {
-			int a = resultInside.get(i);
-			inside = inside * a;
-		}
-		IntRoot result = new IntRoot(coff,inside);
-		
-			return result;
-		}
-	}	
-	
-	//√4 -> 2 √9 -> 3
-	public static int toInt(Root root) {
-		ArrayList<Integer> primeFactors = getPrimeFactorsOf(root.getInsider());
-		ArrayList<Integer> half = detectDoubleNum(primeFactors);
-		int result = 1;
-		for(int i = 0;i<half.size();i++) {
-			result = result * half.get(i);
-		}
-		return result;
-	}
-	
-	public static int toInt2(IntRoot root) {
-		ArrayList<Integer> primeFactors = getPrimeFactorsOf(root.getInsider());
-		ArrayList<Integer> half = detectDoubleNum(primeFactors);
-		int result = 1;
-		for(int i = 0;i<half.size();i++) {
-			result = result * half.get(i);
-		}
-		return result;
-	}
-	
-	
-	//有理化
-	//1/√2 -> √2/2  2/3√3 -> 2√3/9
-	public static IntRootRatio rationalizeOf(IntRootRatio ratio1) {
-		IntRoot denominator = ratio1.getDenominator();
-		IntRoot numerator = ratio1.getNumerator();
-		IntRoot rootDenominator = denominator.getProductedRoot(toIntRoot(denominator.getInsider()));
-		IntRoot rootNumerator = numerator.getProductedRoot(toIntRoot(denominator.getInsider()));
-		IntRootRatio result = new IntRootRatio(rootDenominator,rootNumerator);
-		if(ArrayListMethod.isCoprime(rootDenominator.getCoff(), rootNumerator.getCoff())) {
-			return result;
-		}else {
-			Ratio coffRatio = new Ratio(rootDenominator.getCoff(),rootNumerator.getCoff());
-			Ratio irrRatio = coffRatio.getIrreducibleRatio();
-			IntRoot resultDenominator = new IntRoot(irrRatio.getDenominator(),rootDenominator.getInsider());
-			IntRoot resultNumerator = new IntRoot(irrRatio.getNumerator(),rootNumerator.getInsider());
-			IntRootRatio irrResult = new IntRootRatio(resultDenominator,resultNumerator);
-			return irrResult;
-		}
-	}
-	
+
 	//配列のstring化(ジェネリクス使おう)
 	public static String arrayToString(ArrayList<Integer> arr) {
 		Integer resultInteger = arr.get(0);
