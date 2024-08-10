@@ -4,8 +4,7 @@ import java.util.List;
 
 public class MultiMonomial {
 
-    //3a^4b^2
-    //3a^4b^2 + 4a^3c + 30
+    //「3a^4」や「3a^4b^2」や「3」など多変数の単項式を表すクラス
     Ratio coff;
     List<Pair<Character, Ratio>> variablePart;
 
