@@ -11,10 +11,7 @@ public class Polynomial {
 
     Polynomial(ArrayList<Ratio> ratios) {
         this.coffs = new ArrayList<>();
-        // foreachループでratiosの要素を処理
         for (Ratio ratio : ratios) {
-            // ここで個々のratioに対する処理を行う
-            // 例えば、内部のリストに追加する場合:
             this.coffs.add(ratio);
         }
     }
@@ -42,17 +39,25 @@ public class Polynomial {
         }
     }
 
+    private boolean hasSameDegreeFor(Polynomial p) {
+        if(this.getDegree() == p.getDegree()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //ex. (1+x+3x^2) + (3+5x^2) -> 4+x+8x^2
     public Polynomial add(Polynomial p) {
         Polynomial result = new Polynomial();
         //次数が同じ場合は何も考えず足していけばいい
-        if(this.getDegree() == p.getDegree()) {
+        if(this.hasSameDegreeFor(p)) {
             for (int i = 0; i <= this.getDegree(); i++) {
                 result.coffs.add(this.coffs.get(i).getAddedRatio(p.coffs.get(i)));
             }
             return result;
-        }/*次数が異なる場合は、共通してる部分だけ足して共通してない高次は足さない */ else {
+        } /*次数が異なる場合は、共通してる部分だけ足して共通してない高次は足さない */
+        else {
             Pair<Polynomial, Polynomial> pair = new Pair(this, p);
             Polynomial higher = getHigherDegreePolynomial(pair);
             Polynomial lower = getLowerDegreePolynomial(pair);
